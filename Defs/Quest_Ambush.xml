@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <QuestScriptDef>
+    <defName>TSA_AmbushCaravan_Quest</defName>
+    <autoAccept>True</autoAccept>
+    <isRootSpecial>True</isRootSpecial>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The Caravan Ambush</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->An enemy caravan is passing through a nearby area. Intercept them before they reach the other side!</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+        
+        <li Class="QuestNode_Set">
+          <name>sitePartDefs</name>
+          <value><li>TSA_AmbushCaravanPart</li></value>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile> 
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_GenerateSite">
+          <sitePartsParams>$sitePartsParams</sitePartsParams>
+          <faction>$siteFaction</faction>
+          <tile>$siteTile</tile>
+          <storeAs>site</storeAs>
+        </li>
+
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <delayTicks>180000</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>Quest expired: [resolvedQuestName]</label>
+                <text>The caravan has moved on and is no longer in the area.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

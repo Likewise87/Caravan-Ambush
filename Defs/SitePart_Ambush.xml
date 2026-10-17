@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <SitePartDef>
+    <defName>TSA_AmbushCaravanPart</defName>
+    <label>moving caravan</label>
+    <workerClass>TSA.AmbushQuest.SitePartWorker_AmbushCaravan</workerClass>
+    <tags><li>TSA_AmbushQuest</li></tags>
+		<siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/ItemStash</expandingIconTexture>
+  </SitePartDef>
+</Defs>
